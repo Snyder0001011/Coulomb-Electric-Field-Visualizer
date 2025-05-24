@@ -55,7 +55,7 @@ def find_equilibrium_points(threshold=1e9, spacing=0.05):
     X_flat = X.flatten()
     Y_flat = Y.flatten()
     
-    # Initialize field arrays
+  
     Ex_total = np.zeros_like(X_flat)
     Ey_total = np.zeros_like(Y_flat)
     
@@ -64,7 +64,7 @@ def find_equilibrium_points(threshold=1e9, spacing=0.05):
         dy = Y_flat - chargeY
         R_squared = dx**2 + dy**2
         
-        # Avoid division by zero
+        
         mask = R_squared != 0
         R = np.zeros_like(R_squared)
         R[mask] = np.sqrt(R_squared[mask])
@@ -74,7 +74,7 @@ def find_equilibrium_points(threshold=1e9, spacing=0.05):
     
     E_magnitude = np.sqrt(Ex_total**2 + Ey_total**2)
     
-    # Filter points below threshold
+    
     points = list(zip(X_flat[E_magnitude < threshold], Y_flat[E_magnitude < threshold]))
     return points
 
@@ -129,7 +129,7 @@ while running:
             
     for x, y in equilibrium_points:
                 px, py = to_screen(x, y)
-                square_size = 4  # size of the square side in pixels
+                square_size = 4 
                 rect = pygame.Rect(px - square_size//2, py - square_size//2, square_size, square_size)
                 pygame.draw.rect(screen, (0, 255, 255), rect)
 
@@ -139,9 +139,9 @@ while running:
         else:
             color = RED
         pos = to_screen(x,y)
-        pygame.draw.circle(screen, color, pos, 20)
+        pygame.draw.circle(screen, color, pos, 20) #create a circle like particle 
         if dragged_charge == index:
-            pygame.draw.circle(screen, (0, 255, 0), pos, 23, 1)
+            pygame.draw.circle(screen, (0, 255, 0), pos, 23, 1) #create a circle outside of charge when moving the particle
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
